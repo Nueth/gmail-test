@@ -2,4 +2,4 @@
 build
 target
 todomvctest.iml
-src\test\java\com\course\gmail\testdata\*
+/src/test/java/com/course/gmail/testdata/Config.java
