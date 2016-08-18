@@ -1,32 +1,34 @@
 package com.course.gmail;
 
 
+import com.course.gmail.pages.Gmail;
+import com.course.gmail.pages.Mails;
+import com.course.gmail.pages.Menu;
 import com.course.gmail.testconfigs.BaseTest;
 import org.junit.Test;
 
-import static com.codeborne.selenide.Selenide.open;
-import static com.course.gmail.pages.Gmail.*;
-import static com.course.gmail.testdata.Config.email;
-import static com.course.gmail.testdata.Config.password;
+import static com.course.gmail.testdata.Config.*;
 
 
 public class GmailTest extends BaseTest {
 	@Test
-	public void testGmailLifecycle() {
+	public void testMailsLifeCycle() {
 		
-		open("http://gmail.com");
+		Gmail.visit();
 		
-		logIn(email, password);
+		Gmail.logIn(email, password);
 		
-		composeAndSendLetter(email, "some topic");
+		Mails.sendMail(email, "some topic " + date);
 		
-		openInboxWithUnreadLetters(1);
-		assertLetterInInbox("some topic");
+		Menu.refreshMail();
+		Mails.assertMails(0, "some topic " + date);
 		
-		openOutbox();
-		assertLetterInOutbox(1, "some topic");
+		Menu.openSent();
+		Mails.assertMails(0, "some topic " + date);
 		
-		searchInInbox("some topic");
-		assertVisibleLetters(1);
+		Menu.openInbox();
+		Mails.searchMail("some topic " + date);
+		Mails.assertMails("some topic " + date);
+		
 	}
 }
