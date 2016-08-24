@@ -7,9 +7,9 @@ import com.course.gmail.pages.Menu;
 import com.course.gmail.testconfigs.BaseTest;
 import org.junit.Test;
 
-import static com.codeborne.selenide.Selenide.$$;
-import static com.course.gmail.helpers.Helpers.*;
-import static com.course.gmail.testdata.Credentials.*;
+import static com.course.gmail.helpers.Helpers.getUniqueText;
+import static com.course.gmail.testdata.Credentials.email;
+import static com.course.gmail.testdata.Credentials.password;
 
 
 public class GmailTest extends BaseTest {
@@ -23,10 +23,10 @@ public class GmailTest extends BaseTest {
 		Mails.sendMail(email, topic);
 		
 		Menu.refresh();
-		Mails.assertMails(0, topic);
+		Mails.assertMail(0, topic);
 		
 		Menu.openSent();
-		Mails.assertMails(0, topic);
+		Mails.assertMail(0, topic);
 		
 		Menu.openInbox();
 		Mails.searchMail(topic);

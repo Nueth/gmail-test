@@ -1,14 +1,12 @@
 package com.course.gmail.pages;
 
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import org.openqa.selenium.By;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import static com.codeborne.selenide.CollectionCondition.exactTexts;
 import static com.codeborne.selenide.CollectionCondition.texts;
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -25,8 +23,8 @@ public class Mails {
 	}
 	
 	
-	public static void assertMails(int index, String text) {
-		mails.get(index).shouldHave(text(text));
+	public static void assertMail(int index, String mailText) {
+		mails.get(index).shouldHave(text(mailText));
 	}
 	
 	@Step
